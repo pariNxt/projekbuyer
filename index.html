@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>i Love You Ecaa</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+      overflow: hidden;
+      height: 100vh;
+      perspective: 800px;
+      font-family: Arial, sans-serif;
+    }
+
+    .floating-text, .heart, .photo {
+      position: absolute;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffff;
+      animation: float 20s linear infinite;
+    }
+
+    .heart {
+      color: red;
+      font-size: 30px;
+      text-shadow: 0 0 20px red;
+    }
+
+    .photo {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+      animation: floatPhoto 25s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateZ(0) translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateZ(-800px) translateY(-800px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatPhoto {
+      0% {
+        transform: translateZ(0) translateY(0) rotateY(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateZ(-800px) translateY(-800px) rotateY(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const TOTAL_ITEMS = 280;
+  const IMAGES = [
+    "https://files.catbox.moe/veq4hk.jpg", // Ganti nama ini jika perlu
+    "https://files.catbox.moe/veq4hk.jpg",
+    "https://files.catbox.moe/veq4hk.jpg",
+    "https://files.catbox.moe/veq4hk.jpg",
+    "https://files.catbox.moe/veq4hk.jpg",
+    "https://files.catbox.moe/veq4hk.jpg",
+  ];
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  for (let i = 0; i < TOTAL_ITEMS; i++) {
+    const elemType = Math.floor(Math.random() * 3);
+    let elem;
+
+    if (elemType === 0) {
+      elem = document.createElement("div");
+      elem.className = "floating-text";
+      elem.innerText = "Love you more ecaa";
+    } else if (elemType === 1) {
+      elem = document.createElement("div");
+      elem.className = "heart";
+      elem.innerText = "❤";
+    } else {
+      elem = document.createElement("img");
+      elem.className = "photo";
+      elem.src = IMAGES[i % IMAGES.length];
+    }
+
+    elem.style.top = `${random(0, window.innerHeight)}px`;
+    elem.style.left = `${random(0, window.innerWidth)}px`;
+    elem.style.animationDuration = `${random(10, 30)}s`;
+
+    document.body.appendChild(elem);
+  }
+</script>
+
+</body>
+</html>
